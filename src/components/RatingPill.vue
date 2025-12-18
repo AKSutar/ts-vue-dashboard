@@ -1,10 +1,6 @@
 <!--RatingPill: Displays rating consistently -->
 <template>
-  <span class="panel"
-    style="display:inline-flex; align-items:center; padding: 4px 8px; border-radius: 999px; font-size: 12px;"
-    :title="title">
-    ★ {{ text }}
-  </span>
+  <span class="panel rating" :title="title"> ★ {{ text }} </span>
 </template>
 
 <script setup lang="ts">
@@ -19,3 +15,13 @@ const title = computed(() => (props.rating ? `Rating: ${props.rating}` : "No rat
 
 import { computed } from "vue";
 </script>
+
+<style scoped>
+.rating {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+</style>

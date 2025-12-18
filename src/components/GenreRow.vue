@@ -1,7 +1,7 @@
 <!--GenreRow: Horizontal scrolling list of ShowCards.-->
 <template>
   <section style="margin-top: 14px;">
-    <div class="row" style="justify-content: space-between; margin-bottom: 10px;">
+    <div class="row">
       <h2 style="font-size: 16px;">{{ title }}</h2>
       <div class="muted" style="font-size: 12px;">{{ shows.length }} shows</div>
     </div>

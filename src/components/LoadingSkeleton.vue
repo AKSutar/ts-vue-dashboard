@@ -9,10 +9,6 @@
   </div>
 </template>
 
-<script setup lang="ts">
-
-</script>
-
 <style scoped>
 .skeleton-strip {
   display: grid;

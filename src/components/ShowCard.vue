@@ -10,7 +10,7 @@
       referrerpolicy="no-referrer"
     />
     <div class="body">
-      <div class="row" style="justify-content: space-between; gap: 8px">
+      <div class="row showname">
         <h3 class="title">{{ show.name }}</h3>
         <RatingPill :rating="show.rating?.average ?? null" />
       </div>
@@ -88,5 +88,9 @@ function onOpen() {
 .meta {
   margin-top: 6px;
   font-size: 12px;
+}
+
+.showname{
+  justify-content: space-between; gap: 8px
 }
 </style>

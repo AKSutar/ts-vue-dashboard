@@ -11,7 +11,7 @@
       <ErrorState v-else-if="errorMessage" :message="errorMessage" @retry="reload" />
 
       <div v-else>
-        <div v-if="searchMode" class="panel" style="padding: 12px; margin-bottom: 12px;">
+        <div v-if="searchMode" class="panel search" >
           <div class="row" style="justify-content: space-between;">
             <div>
               <div style="font-weight: 600;">Search results</div>
@@ -134,3 +134,9 @@ function exitSearch() {
 
 onMounted(reload);
 </script>
+
+<style scoped>
+  .search{
+    padding: 12px; margin-bottom: 12px;
+  }
+</style>

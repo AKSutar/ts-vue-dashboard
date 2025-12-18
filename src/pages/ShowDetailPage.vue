@@ -1,11 +1,8 @@
 <!-- ShowDetailPage: Fetches show detail by id -->
 <template>
   <div class="panel" style="padding: 14px">
-    <div class="row" style="justify-content: space-between; margin-bottom: 12px">
+    <div class="row back">
       <button class="btn" type="button" @click="goBack">← Back</button>
-      <a v-if="show?.url" class="muted" :href="show.url" target="_blank" rel="noreferrer"
-        >TVmaze page</a
-      >
     </div>
 
     <LoadingSkeleton v-if="isLoading && !show" />
@@ -15,9 +12,9 @@
       <img class="hero" :src="heroImg" :alt="show.name" loading="lazy" decoding="async" />
 
       <div>
-        <div class="row" style="justify-content: space-between; align-items: flex-start">
+        <div class="row details">
           <div>
-            <h2 style="font-size: 20px; margin-bottom: 6px">{{ show.name }}</h2>
+            <h2 class="showname">{{ show.name }}</h2>
             <div class="muted" style="font-size: 13px">
               {{ show.type || "Show" }}
               <span v-if="show.language"> • {{ show.language }}</span>
@@ -34,14 +31,14 @@
         </div>
 
         <div style="margin-top: 12px">
-          <h3 style="font-size: 14px; margin-bottom: 6px">Summary</h3>
-          <p class="muted" style="margin: 0; line-height: 1.55">
+          <h3 class="summary">Summary</h3>
+          <p class="muted summarytext">
             {{ summaryText || "No summary available." }}
           </p>
         </div>
 
         <div style="margin-top: 12px">
-          <h3 style="font-size: 14px; margin-bottom: 6px">Links</h3>
+          <h3 class="links">Links</h3>
           <div class="row" style="flex-wrap: wrap">
             <a
               v-if="show.officialSite"
@@ -152,5 +149,35 @@ onMounted(load);
   padding: 6px 10px;
   font-size: 12px;
   background: color-mix(in oklab, var(--panel), transparent 0%);
+}
+
+.back {
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.details {
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.showname {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.summary {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.summarytext {
+  margin: 0;
+  line-height: 1.55;
+}
+
+.links {
+  font-size: 14px;
+  margin-bottom: 6px;
 }
 </style>

@@ -5,7 +5,7 @@
 
 import { computed, ref } from "vue";
 import type { TvMazeShow } from "@/types/tvmaze";
-import { fetchShowById, fetchShowsPage, searchShowsByName } from "@/api/tvmaze";
+import { fetchShowById, fetchShowsPage, searchShowsByName } from "@/services/tvmazeApi";
 
 type CachedIndex = {
   savedAt: number;
@@ -22,7 +22,7 @@ const errorMessage = ref<string | null>(null);
 
 const showById = computed(() => {
   const map = new Map<number, TvMazeShow>();
-  for (const s of shows.value) map.set(s.id, s);
+  for (const show of shows.value) map.set(show.id, show);
   return map;
 });
 
@@ -56,24 +56,24 @@ export async function loadIndexPages(pages: number[]): Promise<void> {
   errorMessage.value = null;
 
   const cached = readCache();
-  if (cached && pages.every((p) => cached.pages.includes(p))) {
+  if (cached && pages.every((page) => cached.pages.includes(page))) {
     shows.value = cached.shows;
     return;
   }
 
   isLoading.value = true;
   try {
-    const results = await Promise.all(pages.map((p) => fetchShowsPage(p)));
+    const results = await Promise.all(pages.map((page) => fetchShowsPage(page)));
     const merged = results.flat();
 
     // Deduplicate by show id.
     const byId = new Map<number, TvMazeShow>();
-    for (const s of merged) byId.set(s.id, s);
+    for (const merge of merged) byId.set(merge.id, merge);
 
     shows.value = Array.from(byId.values());
     writeCache({ savedAt: Date.now(), pages, shows: shows.value });
-  } catch (e) {
-    errorMessage.value = e instanceof Error ? e.message : "Unknown error";
+  } catch (err) {
+    errorMessage.value = err instanceof Error ? err.message : "Unknown error";
   } finally {
     isLoading.value = false;
   }
@@ -98,7 +98,7 @@ export async function searchRemote(query: string): Promise<TvMazeShow[]> {
   if (!trimmed) return [];
 
   const results = await searchShowsByName(trimmed);
-  return results.map((r) => r.show);
+  return results.map((result) => result.show);
 }
 
 export function useShowsState() {
