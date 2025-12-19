@@ -39,7 +39,7 @@ import GenreRow from "@/components/GenreRow.vue";
 import ErrorState from "@/components/ErrorState.vue";
 
 const router = useRouter();
-const { shows, isLoading, errorMessage } = useShowsState();
+const { shows, errorMessage } = useShowsState();
 
 const PAGES_TO_PREFETCH = [0, 1]; // keep small for fast rendering
 const query = ref("");
@@ -47,8 +47,6 @@ const query = ref("");
 const searchMode = ref(false);
 const lastSearch = ref("");
 const searchResults = ref<TvMazeShow[]>([]);
-
-const hasAnyShows = computed(() => shows.value.length > 0);
 
 /** The source list changes depending on dashboard/search mode. */
 const activeList = computed(() => (searchMode.value ? searchResults.value : shows.value));
@@ -59,8 +57,6 @@ const activeList = computed(() => (searchMode.value ? searchResults.value : show
  */
 const locallyFiltered = computed(() => {
   const queryData = query.value.trim().toLowerCase();
-  if (!queryData) return activeList.value;
-
   return activeList.value.filter((list) => list.name.toLowerCase().includes(queryData));
 });
 
@@ -93,9 +89,9 @@ function openShow(id: number) {
 /** Remote search (explicit user action). */
 async function onSearch(value: string) {
   const remoteSearch = value.trim();
-  if (!remoteSearch){
+  if (!remoteSearch) {
     return;
-  };
+  }
 
   lastSearch.value = remoteSearch;
   searchMode.value = true;

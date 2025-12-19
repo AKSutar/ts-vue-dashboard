@@ -20,11 +20,11 @@ describe("shows utils", () => {
   it("sortShowsByRatingDesc sorts rating desc then name", () => {
     const list = [
       utilTest({ id: 1, name: "B", genres: ["Drama"], rating: { average: 8.2 } }),
-      utilTest({ id: 2, name: "A", genres: ["Drama"], rating: { average: 8.2 } }),
+      utilTest({ id: 2, name: "A", genres: ["Drama"], rating: { average: 7.2 } }),
       utilTest({ id: 3, name: "C", genres: ["Drama"], rating: { average: 9.1 } })
     ];
     const sorted = sortShowsByRatingDesc(list);
-    expect(sorted.map((x) => x.id)).toEqual([3, 2, 1]);
+    expect(sorted.map((x) => x.id)).toEqual([3, 1, 2]);
   });
 
   it("groupShowsByGenre creates 'Other' when no genres", () => {

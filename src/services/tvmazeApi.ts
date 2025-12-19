@@ -8,8 +8,8 @@ import { TvMazeSearchResult, TvMazeShow } from "@/types/tvmaze";
 const BASE_URL = "https://api.tvmaze.com";
 
 /** Reads JSON and throws a descriptive error for responses. */
-async function fetchJson<Data>(input: RequestInfo | URL, init?: RequestInit): Promise<Data> {
-  const res = await fetch(input, init);
+async function fetchJson<Data>(input: RequestInfo | URL): Promise<Data> {
+  const res = await fetch(input);
   if (!res.ok) {
     throw new Error(`Request failed: ${res.status} ${res.statusText}`);
   }

@@ -10,7 +10,6 @@
  */
 import { computed } from "vue";
 const props = defineProps<{ rating: number | null | undefined }>();
-
 const text = computed(() => (props.rating ? props.rating.toFixed(1) : "N/A"));
 
 </script>
