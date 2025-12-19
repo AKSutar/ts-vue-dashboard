@@ -1,21 +1,20 @@
 <!-- ShowDetailPage: Fetches show detail by id -->
 <template>
-  <div class="panel" style="padding: 14px">
-    <div class="row back">
+  <div class="panel p-4">
+    <div class="row justify-between mb-4">
       <button class="btn" type="button" @click="goBack">← Back</button>
     </div>
 
-    <LoadingSkeleton v-if="isLoading && !show" />
-    <ErrorState v-else-if="errorMessage" :message="errorMessage" @retry="load" />
+    <ErrorState v-if="errorMessage" :message="errorMessage" @retry="load" />
 
     <div v-else-if="show" class="detail">
       <img class="hero" :src="heroImg" :alt="show.name" loading="lazy" decoding="async" />
 
       <div>
-        <div class="row details">
+        <div class="row justify-between items-start">
           <div>
-            <h2 class="showname">{{ show.name }}</h2>
-            <div class="muted" style="font-size: 13px">
+            <h2 class="mb-2 text-xl">{{ show.name }}</h2>
+            <div class="muted text-sm mb-2" >
               {{ show.type || "Show" }}
               <span v-if="show.language"> • {{ show.language }}</span>
               <span v-if="show.premiered"> • {{ show.premiered }}</span>
@@ -25,34 +24,16 @@
           <RatingPill :rating="show.rating?.average ?? null" />
         </div>
 
-        <div class="chips" style="margin-top: 10px">
-          <span v-for="g in show.genres" :key="g" class="chip">{{ g }}</span>
+        <div class="chips">
+          <span v-for="genre in show.genres" :key="genre" class="chip">{{ genre }}</span>
           <span v-if="!show.genres?.length" class="chip">Other</span>
         </div>
 
-        <div style="margin-top: 12px">
-          <h3 class="summary">Summary</h3>
-          <p class="muted summarytext">
+        <div class="mt-2">
+          <h3 class="mb-2 text-2xl">Summary</h3>
+          <p class="muted leading-normal">
             {{ summaryText || "No summary available." }}
           </p>
-        </div>
-
-        <div style="margin-top: 12px">
-          <h3 class="links">Links</h3>
-          <div class="row" style="flex-wrap: wrap">
-            <a
-              v-if="show.officialSite"
-              class="btn"
-              :href="show.officialSite"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Official site
-            </a>
-            <a v-if="show.url" class="btn" :href="show.url" target="_blank" rel="noreferrer">
-              TVmaze
-            </a>
-          </div>
         </div>
       </div>
     </div>
@@ -70,7 +51,6 @@
 import { computed, onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import RatingPill from "@/components/RatingPill.vue";
-import LoadingSkeleton from "@/components/LoadingSkeleton.vue";
 import ErrorState from "@/components/ErrorState.vue";
 import { getShowDetails } from "@/composables/useShowsStore";
 import { summaryToText } from "@/utils/shows";
@@ -142,6 +122,7 @@ onMounted(load);
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  margin-top: 1.5;
 }
 .chip {
   border: 1px solid var(--border);
@@ -149,35 +130,5 @@ onMounted(load);
   padding: 6px 10px;
   font-size: 12px;
   background: color-mix(in oklab, var(--panel), transparent 0%);
-}
-
-.back {
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-
-.details {
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.showname {
-  font-size: 20px;
-  margin-bottom: 6px;
-}
-
-.summary {
-  font-size: 14px;
-  margin-bottom: 6px;
-}
-
-.summarytext {
-  margin: 0;
-  line-height: 1.55;
-}
-
-.links {
-  font-size: 14px;
-  margin-bottom: 6px;
 }
 </style>

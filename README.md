@@ -1,4 +1,4 @@
-# TV DASHBOARD (Vue 3 + TypeScript)
+# TV DASHBOARD (Vue 3 + TypeScript + TailwindCSS)
 
 A responsive TV show dashboard using the TVMaze API:
 
@@ -13,7 +13,7 @@ Learn more about the recommended Project Setup and IDE Support in the [Vue Docs 
 
 ## Prerequisites
 
-- **Node.js:** v20.19.0 or higher
+- **Node.js:** v22.14.00
 - **NPM:** 10.9.3
 
 ### Installation
@@ -72,20 +72,19 @@ tv-vue-dashboard/
 │ │ ├─ GenreRow.vue
 │ │ ├─ ShowCard.vue
 │ │ ├─ RatingPill.vue
-│ │ ├─ LoadingSkeleton.vue
 │ │ └─ ErrorState.vue
 │ │
 │ └─ pages/
 │ ├─ DashboardPage.vue
 │ ├─ ShowDetailPage.vue
-│ └─ NotFoundPage.vue
+
 
 /src
 - /components - Reusable UI components (SearchBar.vue, RatingPill.vue, etc.).
 - /pages - Application pages or view layer of the webpage.
 - /api - All kind of API calls are made inside this folder.
 - /router - Provides routing for the webpage.
-- /tests - Unit cases testing files
+- /tests - Unit test cases files
 - /types - Provides interfaces for this webpage.
 - /utils - Helper functions
 

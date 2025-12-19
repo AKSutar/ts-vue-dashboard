@@ -4,6 +4,8 @@
   - Uses system fonts and supports dark mode.
 */
 
+@import "tailwindcss";
+
 :root {
   --bg: #0b1220;
   --panel: #101a2e;

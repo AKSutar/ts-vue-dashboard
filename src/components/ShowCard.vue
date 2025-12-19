@@ -9,12 +9,12 @@
       decoding="async"
       referrerpolicy="no-referrer"
     />
-    <div class="body">
-      <div class="row showname">
-        <h3 class="title">{{ show.name }}</h3>
+    <div class="p-2.5">
+      <div class="row justify-between gap-1">
+        <h3 class="text-md leading-3">{{ show.name }}</h3>
         <RatingPill :rating="show.rating?.average ?? null" />
       </div>
-      <div class="muted meta">{{ metaText }}</div>
+      <div class="muted mt-1 text-md">{{ metaText }}</div>
     </div>
   </article>
 </template>
@@ -26,7 +26,7 @@
  * - open: emitted on user selection.
  */
 import { computed } from "vue";
-import type { TvMazeShow } from "@/types/tvmaze";
+import { TvMazeShow } from "@/types/tvmaze";
 import RatingPill from "@/components/RatingPill.vue";
 
 const props = defineProps<{ show: TvMazeShow }>();
@@ -77,20 +77,5 @@ function onOpen() {
   object-fit: cover;
   display: block;
   border-bottom: 1px solid var(--border);
-}
-.body {
-  padding: 10px;
-}
-.title {
-  font-size: 14px;
-  line-height: 1.2;
-}
-.meta {
-  margin-top: 6px;
-  font-size: 12px;
-}
-
-.showname{
-  justify-content: space-between; gap: 8px
 }
 </style>

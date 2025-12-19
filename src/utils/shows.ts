@@ -1,7 +1,7 @@
 /**
  * Show-related pure utilities: sorting, grouping, etc.
  */
-import type { TvMazeShow } from "@/types/tvmaze";
+import { TvMazeShow } from "@/types/tvmaze";
 
 export type GenreBuckets = Record<string, TvMazeShow[]>;
 
@@ -19,11 +19,11 @@ export function getRatingValue(show: TvMazeShow): number {
 
 /** Sorts shows by rating (desc) then by name (asc). */
 export function sortShowsByRatingDesc(shows: TvMazeShow[]): TvMazeShow[] {
-  return [...shows].sort((a, b) => {
-    const ra = getRatingValue(a);
-    const rb = getRatingValue(b);
+  return [...shows].sort((top, average) => {
+    const ra = getRatingValue(top);
+    const rb = getRatingValue(average);
     if (rb !== ra) return rb - ra;
-    return a.name.localeCompare(b.name);
+    return top.name.localeCompare(average.name);
   });
 }
 

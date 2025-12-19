@@ -1,13 +1,13 @@
 <!--GenreRow: Horizontal scrolling list of ShowCards.-->
 <template>
-  <section style="margin-top: 14px;">
-    <div class="row">
-      <h2 style="font-size: 16px;">{{ title }}</h2>
-      <div class="muted" style="font-size: 12px;">{{ shows.length }} shows</div>
+  <section class="mt-2">
+    <div class="row justify-between mb-2">
+      <h2 class="text-lg">{{ title }}</h2>
+      <div class="muted text-sm">{{ shows.length }} shows</div>
     </div>
 
     <div class="strip">
-      <ShowCard v-for="s in shows" :key="s.id" :show="s" @open="$emit('open', $event)" />
+      <ShowCard v-for="show in shows" :key="show.id" :show="show" @open="$emit('open', $event)" />
     </div>
   </section>
 </template>
@@ -18,7 +18,7 @@
  * - title: genre label.
  * - shows: list for that genre, already sorted.
  */
-import type { TvMazeShow } from "@/types/tvmaze";
+import { TvMazeShow } from "@/types/tvmaze";
 import ShowCard from "@/components/ShowCard.vue";
 
 defineProps<{ title: string; shows: TvMazeShow[] }>();

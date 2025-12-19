@@ -4,7 +4,7 @@
 import { describe, expect, it } from "vitest";
 import { mount } from "@vue/test-utils";
 import ShowCard from "@/components/ShowCard.vue";
-import type { TvMazeShow } from "@/types/tvmaze";
+import { TvMazeShow } from "@/types/tvmaze";
 
 function makeShow(partial: Partial<TvMazeShow> & Pick<TvMazeShow, "id" | "name" | "genres">): TvMazeShow {
   return {
@@ -15,7 +15,7 @@ function makeShow(partial: Partial<TvMazeShow> & Pick<TvMazeShow, "id" | "name" 
 
 describe("ShowCard", () => {
   it("emits open with show id on click", async () => {
-    const show = makeShow({ id: 10, name: "Demo", genres: ["Drama"], rating: { average: 8.3 } });
+    const show = makeShow({ id: 10, name: "TripTank", genres: ["Animation"], rating: { average: 8.3 } });
 
     const wrapper = mount(ShowCard, {
       props: { show },

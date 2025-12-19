@@ -1,6 +1,6 @@
 <!--RatingPill: Displays rating consistently -->
 <template>
-  <span class="panel rating" :title="title"> ★ {{ text }} </span>
+  <span class="panel rating"> ★ {{ text }} </span>
 </template>
 
 <script setup lang="ts">
@@ -8,12 +8,11 @@
  * RatingPill:
  * - rating: numeric rating or null.
  */
+import { computed } from "vue";
 const props = defineProps<{ rating: number | null | undefined }>();
 
 const text = computed(() => (props.rating ? props.rating.toFixed(1) : "N/A"));
-const title = computed(() => (props.rating ? `Rating: ${props.rating}` : "No rating available"));
 
-import { computed } from "vue";
 </script>
 
 <style scoped>

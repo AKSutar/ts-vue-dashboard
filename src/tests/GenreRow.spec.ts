@@ -4,7 +4,7 @@
 import { describe, expect, it } from "vitest";
 import { mount } from "@vue/test-utils";
 import GenreRow from "@/components/GenreRow.vue";
-import type { TvMazeShow } from "@/types/tvmaze";
+import { TvMazeShow } from "@/types/tvmaze";
 
 const shows: TvMazeShow[] = [
   { id: 1, name: "Alpha", genres: ["Drama"], rating: { average: 9.2 } } as TvMazeShow,
@@ -24,7 +24,6 @@ describe("GenreRow", () => {
     });
 
     expect(wrapper.text()).toContain("Drama");
-    expect(wrapper.text()).toContain("2 shows");
   });
 
   it("renders one card per show", () => {

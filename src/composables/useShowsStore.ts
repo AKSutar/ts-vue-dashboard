@@ -4,7 +4,7 @@
  */
 
 import { computed, ref } from "vue";
-import type { TvMazeShow } from "@/types/tvmaze";
+import { TvMazeShow } from "@/types/tvmaze";
 import { fetchShowById, fetchShowsPage, searchShowsByName } from "@/services/tvmazeApi";
 
 type CachedIndex = {
@@ -14,7 +14,7 @@ type CachedIndex = {
 };
 
 const CACHE_KEY = "tv-dashboard:index-cache-v1";
-const CACHE_TTL_MS = 1000 * 60 * 60 * 24; // 24h; TVmaze mentions show-index caching up to 24 hours. [web:21]
+const CACHE_TTL_MS = 1000 * 60 * 60 * 24; // 24h; TVmaze mentions show-index caching up to 24 hours.
 
 const shows = ref<TvMazeShow[]>([]);
 const isLoading = ref(false);
@@ -36,15 +36,6 @@ function readCache(): CachedIndex | null {
     return parsed;
   } catch {
     return null;
-  }
-}
-
-/** Writes the full cache payload. */
-function writeCache(payload: CachedIndex): void {
-  try {
-    localStorage.setItem(CACHE_KEY, JSON.stringify(payload));
-  } catch {
-    // Ignore storage quota / privacy mode failures.
   }
 }
 
@@ -71,7 +62,6 @@ export async function loadIndexPages(pages: number[]): Promise<void> {
     for (const merge of merged) byId.set(merge.id, merge);
 
     shows.value = Array.from(byId.values());
-    writeCache({ savedAt: Date.now(), pages, shows: shows.value });
   } catch (err) {
     errorMessage.value = err instanceof Error ? err.message : "Unknown error";
   } finally {
