@@ -54,7 +54,7 @@ import RatingPill from "@/components/RatingPill.vue";
 import ErrorState from "@/components/ErrorState.vue";
 import { getShowDetails } from "@/composables/useShowsStore";
 import { summaryToText } from "@/utils/shows";
-import type { TvMazeShow } from "@/types/tvmaze";
+import { TvMazeShow } from "@/types/tvmaze";
 
 const route = useRoute();
 const router = useRouter();

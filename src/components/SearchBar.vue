@@ -2,8 +2,15 @@
 <template>
   <form class="panel p-1" @submit.prevent="onSubmit">
     <div class="row g-4">
-      <input class="input" :value="modelValue" type="text" inputmode="search" placeholder="Search shows by name..."
-        aria-label="Search shows" @input="onInput" />
+      <input
+        class="input"
+        :value="modelValue"
+        type="text"
+        inputmode="search"
+        placeholder="Search shows by name..."
+        aria-label="Search shows"
+        @input="onInput"
+      />
       <button v-if="modelValue" class="btn" type="button" @click="onClear">Clear</button>
     </div>
   </form>
@@ -22,11 +29,11 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 const props = defineProps<{ modelValue: string }>();
 
-function goToDashboard() {
-  router.push({ name: "dashboard" }).catch(() => {
-    // Ignore navigation duplication errors (already on the dashboard).
-  });
-}
+/** Debounce config for auto-search. */
+const DEBOUNCE_MS = 350;
+const MIN_CHARS = 2;
+
+let timer: number | undefined;
 
 const emit = defineEmits<{
   (e: "update:modelValue", value: string): void;
@@ -34,11 +41,11 @@ const emit = defineEmits<{
   (e: "clear"): void;
 }>();
 
-/** Debounce config for auto-search. */
-const DEBOUNCE_MS = 350;
-const MIN_CHARS = 2;
-
-let timer: number | undefined;
+function goToDashboard() {
+  router.push({ name: "dashboard" }).catch(() => {
+    // Ignore navigation duplication errors (already on the dashboard).
+  });
+}
 
 /** Clears any pending debounced search. */
 function cancelPendingSearch() {
