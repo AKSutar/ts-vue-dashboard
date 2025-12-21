@@ -39,6 +39,15 @@ function readCache(): CachedIndex | null {
   }
 }
 
+/** Writes the full cache payload. */
+function writeCache(payload: CachedIndex): void {
+  try {
+    localStorage.setItem(CACHE_KEY, JSON.stringify(payload));
+  } catch {
+    // Ignore storage quota / privacy mode failures.
+  }
+}
+
 /**
  * Loads a few pages from the TVmaze show index.
  * Keeping the number small makes initial render fast.
@@ -62,6 +71,7 @@ export async function loadIndexPages(pages: number[]): Promise<void> {
     for (const merge of merged) byId.set(merge.id, merge);
 
     shows.value = Array.from(byId.values());
+    writeCache({ savedAt: Date.now(), pages, shows: shows.value });
   } catch (err) {
     errorMessage.value = err instanceof Error ? err.message : "Unknown error";
   } finally {
